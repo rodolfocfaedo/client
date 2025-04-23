@@ -80,11 +80,11 @@ public class ClientConverter {
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
-    public Cellphone toCellphone (CellphoneDTO cellphoneDTO, Long personId){
+    public Cellphone toCellphone (CellphoneDTO cellphoneDTO, Long clientId){
         return Cellphone.builder()
                 .areaCode(cellphoneDTO.getAreaCode())
                 .number(cellphoneDTO.getNumber())
-                .client_id(personId)
+                .client_id(clientId)
                 .build();
     }
 
