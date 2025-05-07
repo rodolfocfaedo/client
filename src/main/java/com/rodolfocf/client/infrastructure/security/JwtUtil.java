@@ -11,7 +11,7 @@ import java.util.Date;
 @Service
 public class JwtUtil {
 
-    private final SecretKey secretKey = Keys.hmacShaKeyFor("minha-chave-secreta-muito-segura-12345".getBytes());
+    private final SecretKey secretKey = Keys.hmacShaKeyFor("sua-chave-secreta-forte-aqui-com-32-caracteres".getBytes());
 
     public String generateToken(String username) {
         return Jwts.builder()

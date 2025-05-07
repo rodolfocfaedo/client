@@ -25,6 +25,7 @@ public class ClientService {
     private final ClientConverter clientConverter;
     private final CellphoneRepository cellphoneRepository;
 
+    @Transactional
     public Client saveClient(Client client){
         try {
             emailExists(client.getEmail());
@@ -99,6 +100,7 @@ public class ClientService {
         Client client = clientRepository.findByEmail(email).orElseThrow(
                 () -> new ResourceNotFoundException("Email " + email + " not found or not registered"));
         Cellphone cellphone = clientConverter.toCellphone(cellphoneDTO, client.getId());
+
         Cellphone cellphoneEntity = cellphoneRepository.save(cellphone);
         return clientConverter.toCellphoneDTO(cellphoneEntity);
     }

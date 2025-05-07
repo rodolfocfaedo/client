@@ -13,20 +13,20 @@ public class ClientConverter {
 
 //----------------------------------------------------------DTO to ENTITY---------------------------------------------------------------------------
 
-    public Client toClientEntity(ClientDTO clientDTO){
+    public Client toClientEntity(ClientDTO clientDTO) {
         return Client.builder()
                 .name(clientDTO.getName())
                 .email(clientDTO.getEmail())
                 .password(clientDTO.getPassword())
-                .cellphones(toListCellphoneEntity(clientDTO.getCellphones()))
+                .cellphones(clientDTO.getCellphones() != null ? toListCellphoneEntity(clientDTO.getCellphones()) : null)
                 .build();
     }
 
-    public List<Cellphone> toListCellphoneEntity(List<CellphoneDTO> cellphoneDTO){
-        return cellphoneDTO.stream().map(this :: toCellphoneEntity).toList();
+    public List<Cellphone> toListCellphoneEntity(List<CellphoneDTO> cellphoneDTO) {
+        return cellphoneDTO.stream().map(this::toCellphoneEntity).toList();
     }
 
-    public Cellphone toCellphoneEntity(CellphoneDTO cellphoneDTO){
+    public Cellphone toCellphoneEntity(CellphoneDTO cellphoneDTO) {
         return Cellphone.builder()
                 .number(cellphoneDTO.getNumber())
                 .areaCode(cellphoneDTO.getAreaCode())
@@ -35,21 +35,21 @@ public class ClientConverter {
 
     //----------------------------------------------------------ENTITY to DTO----------------------------------------------------------------------
 
-    public ClientDTO toClientDTO(Client client){
+    public ClientDTO toClientDTO(Client client) {
         return ClientDTO.builder()
                 .name(client.getName())
                 .email(client.getEmail())
                 .password(client.getPassword())
-                .cellphones(toListCellphoneDTO(client.getCellphones()))
+                .cellphones(client.getCellphones() != null ? toListCellphoneDTO(client.getCellphones()) : null)
                 .build();
     }
 
-    public List<CellphoneDTO> toListCellphoneDTO(List<Cellphone> cellphone){
-        return cellphone.stream().map(this :: toCellphoneDTO).toList();
+    public List<CellphoneDTO> toListCellphoneDTO(List<Cellphone> cellphone) {
+        return cellphone.stream().map(this::toCellphoneDTO).toList();
     }
 
 
-    public CellphoneDTO toCellphoneDTO(Cellphone cellphone){
+    public CellphoneDTO toCellphoneDTO(Cellphone cellphone) {
         return CellphoneDTO.builder()
                 .id(cellphone.getId())
                 .number(cellphone.getNumber())
@@ -59,7 +59,7 @@ public class ClientConverter {
 
     //----------------------------------------------- UPDATES -----------------------------------------------------------------------------
 
-    public Client clientUpdate(ClientDTO clientDTO, Client clientEntity){
+    public Client clientUpdate(ClientDTO clientDTO, Client clientEntity) {
         return Client.builder()
                 .name(clientDTO.getName() != null ? clientDTO.getName() : clientEntity.getName())
                 .id(clientEntity.getId())
@@ -69,7 +69,7 @@ public class ClientConverter {
                 .build();
     }
 
-    public Cellphone cellphoneUpdate(CellphoneDTO cellphoneDTO, Cellphone cellphoneEntity){
+    public Cellphone cellphoneUpdate(CellphoneDTO cellphoneDTO, Cellphone cellphoneEntity) {
         return Cellphone.builder()
                 .id(cellphoneEntity.getId())
                 .areaCode((cellphoneDTO.getAreaCode() != null ? cellphoneDTO.getAreaCode() : cellphoneEntity.getAreaCode()))
@@ -80,7 +80,7 @@ public class ClientConverter {
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
-    public Cellphone toCellphone (CellphoneDTO cellphoneDTO, Long clientId){
+    public Cellphone toCellphone(CellphoneDTO cellphoneDTO, Long clientId) {
         return Cellphone.builder()
                 .areaCode(cellphoneDTO.getAreaCode())
                 .number(cellphoneDTO.getNumber())
